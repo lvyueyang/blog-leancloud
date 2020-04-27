@@ -11,7 +11,7 @@
         "axios": "^0.18.0",
         "dayjs": "^1.7.7",
         "highlight.js": "^9.13.1",
-        "lodash": "^4.17.11",
+        "lodash": "^4.17.13",
         "mavon-editor": "^2.6.17",
         "vue": "^2.5.17",
         "vue-popjs": "^1.0.2",
