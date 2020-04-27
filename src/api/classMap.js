@@ -1,0 +1,6 @@
+export const ARTICLE = 'Article'
+export const COMMENT = 'Comment'
+export const COMMENT_CHILDREN = 'CommentChildren'
+export const TAG = 'Tag'
+export const USER = '_User'
+export const FILE = '_File'
