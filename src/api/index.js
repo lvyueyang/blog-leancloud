@@ -1,6 +1,6 @@
 import axios from './axios'
 import utils from "@/util/index"
-import {ARTICLE, TAG, COMMENT, COMMENT_CHILDREN, USER, FILE} from "./classMap"
+import {ARTICLE, ARTICLE_COLLECTION, TAG, COMMENT, COMMENT_CHILDREN, USER, FILE} from "./classMap"
 
 // 仅自己和管理员可写，所有人可读
 function ACLWriteSetMe() {
@@ -117,6 +117,23 @@ export default {
                 content,
                 tags
             })
+        },
+        collection: {
+            create({articleId, userId}) {
+                const data = {
+                    article: {
+                        __type: 'Pointer',
+                        className: ARTICLE,
+                        objectId: articleId
+                    },
+                    user: {
+                        __type: 'Pointer',
+                        className: USER,
+                        objectId: userId
+                    }
+                }
+                return axios.post(`/classes/${ARTICLE_COLLECTION}`, data)
+            }
         }
     },
     comment: {

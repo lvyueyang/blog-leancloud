@@ -6,7 +6,7 @@
             </div>
             <div class="msg">{{text}}</div>
             <div class="info">{{info}}</div>
-<!--            <code v-html="message"></code>-->
+            <!--            <code v-html="message"></code>-->
         </div>
     </div>
 </template>
@@ -31,6 +31,10 @@
                 this.loading = true
                 try {
                     let {data} = await this.$api.user.login.gitHub(code)
+                    console.log(data)
+                    if (!data.result.token) {
+                        throw new Error(data.result)
+                    }
                     this.$utils.store.set('token', data.result.token)
                     this.text = '登陆成功！'
                     window.opener.location.reload()
