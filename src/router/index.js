@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Index = () => import('../views/index/index')
+const Index = () => import('../views/home/index')
 const Main = () => import('../views/main')
 
 Vue.use(Router)
@@ -74,7 +74,21 @@ export default new Router({
             path: '/github-sign',
             name: 'githubSign',
             components: {
-                admin: () => import('../views/login-cb/github')
+                admin: () => import('../views/login-cb/index')
+            }
+        },
+        {
+            path: '/gitee-sign',
+            name: 'giteeSign',
+            components: {
+                admin: () => import('../views/login-cb/index')
+            }
+        },
+        {
+            path: '/test',
+            name: 'test',
+            components: {
+                admin: () => import('../views/test/index')
             }
         }
 

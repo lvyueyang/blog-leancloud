@@ -19,3 +19,42 @@
         },
     }
 </script>
+<style lang="scss" scoped>
+
+    .main-wrapper {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+    }
+
+    .container {
+        flex: 1;
+        width: 100%;
+        min-height: 100vh;
+        margin-left: 20px;
+        background-color: #fff;
+        padding: 0 30px;
+        overflow-x: hidden;
+        @media (max-width: 768px) {
+            margin-left: 0;
+            padding: 0 10px;
+            overflow: hidden;
+        }
+    }
+
+    .footer {
+        margin: 0 -30px;
+        font-size: 12px;
+        text-align: center;
+        height: 60px;
+        line-height: 60px;
+        padding: 0;
+        color: #999;
+        background-color: #f5f7f9;
+
+        a {
+            color: #999;
+        }
+    }
+</style>

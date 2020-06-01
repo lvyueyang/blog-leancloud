@@ -9,22 +9,26 @@
                     <i class="iconfont icon-time-line"></i>{{info.createdAt | formatDate}}
                 </div>
                 <div class="span">
-                    <i class="iconfont icon-heart-line"></i>{{info.counts.like}}
+                    <i class="iconfont icon-heart-line"></i>{{info.counts.collection}}
                 </div>
                 <div class="span">
                     <i class="iconfont icon-message--line1"></i>{{info.counts.comment}}
                 </div>
-                <div class="span">
+                <!--<div class="span">
                     <i class="iconfont icon-eye-line"></i>{{info.counts.look}}
+                </div>-->
+                <div class="span collection" @click="handlerCollection">
+                    {{isCollection ? '已收藏' : '收藏'}}
                 </div>
-                <div class="span collection">
-                    收藏
-                </div>
-                <router-link class="span cur" target="_blank" :to="'/editor?id='+ info.objectId">编辑</router-link>
+                <router-link v-if="userId === info.auth.objectId"
+                             class="span cur"
+                             target="_blank"
+                             :to="'/editor?id='+ info.objectId">编辑
+                </router-link>
             </div>
             <div class="content-html markdown-body" v-html="info.content"></div>
             <div class="article-tags">
-                <router-link :to="`/article?tag=${v.objectId}`" v-for="v in info.tags" :key="v.objectId"># {{v.name}}
+                <router-link :to="`/article?tag=${v}`" v-for="v in info.tags" :key="v"># {{v}}
                 </router-link>
             </div>
             <div class="page">
@@ -34,14 +38,13 @@
                 <span v-else></span>
             </div>
             <!--评论部分-->
-            <comment :article-id="articleId"></comment>
+            <comment :article-id="articleId" :article-info="info"></comment>
         </template>
     </div>
 </template>
 
 <script>
     import Comment from './components/comment'
-    import userFormat from '../../util/userFormat'
 
     export default {
         name: 'ArticleDetail',
@@ -50,32 +53,40 @@
                 info: null,
                 loading: true,
                 articleError: false,
-                addLoading: false
+                addLoading: false,
+                isCollection: false
             }
         },
         computed: {
             articleId() {
                 return this.$route.params.id
+            },
+            userId() {
+                return this.$utils.store.get('userInfo').objectId
             }
         },
         components: {Comment},
-        mounted() {
-            this.init()
+        async mounted() {
+            this.loading = true
+            this.articleError = false
+            await this.getDetail()
+            this.loading = false
+            this.judgeCollection()
         },
         methods: {
-            init() {
-                this.getDetail()
+            async judgeCollection() {
+                try {
+                    const d = await this.$api.article.userInCollectionArticle(this.articleId)
+                    this.isCollection = !!d
+                } catch (e) {
+                    this.isCollection = false
+                }
             },
             // 获取文章详情
             async getDetail() {
-                this.loading = true
-                this.articleError = false
-                const id = this.$route.params.id
+                const id = this.articleId
                 try {
-                    const data = await this.$api.article.detail(id)
-                    // console.log(data)
-                    data.content = this.$md.render(data.content)
-                    this.info = data
+                    this.info = await this.$api.article.detail(id)
                 } catch (e) {
                     this.$pop.notice({
                         title: '获取失败',
@@ -83,8 +94,61 @@
                     })
                     this.articleError = true
                 }
-                this.loading = false
+            },
+            async handlerCollection() {
+                const id = this.articleId
+                try {
+                    await this.$api.article.collection(id)
+                    await this.getDetail()
+                    await this.judgeCollection()
+                } catch (e) {
+                    console.log(e)
+                    this.$pop.notice({
+                        title: '操作失败',
+                        type: 'error'
+                    })
+                }
+
             },
         }
     }
 </script>
+<style lang="scss" scoped>
+    .article-detail {
+        min-height: calc(100vh - 63px);
+        padding-top: 50px;
+        padding-bottom: 30px;
+
+        .content-html {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .page {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px dashed #eee;
+            font-size: 12px;
+            padding-top: 15px;
+            margin-top: 25px;
+
+            a {
+                color: #666;
+
+                &:hover {
+                    color: #333;
+
+                    i {
+                        color: #333;
+                    }
+                }
+            }
+
+            i {
+                font-size: 12px;
+            }
+        }
+    }
+</style>

@@ -39,7 +39,7 @@
                 <div class="form-item">
                     <label for="">签名：</label>
                     <div class="content-text">
-                        <textarea v-model="userinfo.ones" rows="6"></textarea>
+                        <textarea v-model="userinfo.ones" rows="4"></textarea>
                     </div>
                 </div>
                 <div class="form-item">

@@ -1,10 +1,6 @@
 <template>
     <div class="pager">
         <button @click="prev" v-if="page > 1">上一页</button>
-        <!--<a href="" class="active">1</a>-->
-        <!--<a href="">2</a>-->
-        <!--<span>...</span>-->
-        <!--<a href="">15</a>-->
         <button @click="next" v-if="count >= 10">下一页</button>
     </div>
 </template>
@@ -32,3 +28,33 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+    .pager {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 13px;
+
+        button {
+            border: none;
+            margin: 0 15px;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        a, span {
+            color: #333;
+            padding: 3px 10px;
+            margin: 0 3px;
+        }
+
+        a {
+            &:hover, &.active {
+                background-color: #eee;
+            }
+        }
+    }
+
+</style>

@@ -1,35 +1,5 @@
 @import "src/style/moudles/reset";
-
-.main-wrapper {
-    position: relative;
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-}
-
-.container {
-    flex: 1;
-    width: 100%;
-    min-height: 100vh;
-    margin-left: 20px;
-    background-color: #fff;
-    padding: 0 30px;
-    overflow-x: hidden;
-    @media (max-width: 768px) {
-        margin-left: 0;
-        padding: 0 10px;
-        overflow: hidden;
-    }
-}
-
 @import "src/style/moudles/animation";
-@import "src/style/moudles/side-bar";
 @import "src/style/moudles/article";
-@import "src/style/moudles/login";
-@import "src/style/moudles/btn";
-@import "src/style/moudles/pager";
-@import "src/style/moudles/footer";
 @import "src/style/moudles/admin";
-@import "src/style/moudles/editor-wrapper";
 @import "src/style/moudles/github-markdown";
-@import "src/style/moudles/login-cb-wrapper";

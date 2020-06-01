@@ -29,7 +29,7 @@ export default {
     },
     getUrlParam(name) {
         let url = window.location.search
-        let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)")
+        let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
         let result = url.substr(1).match(reg)
         return result ? decodeURIComponent(result[2]) : null
     },
@@ -47,5 +47,5 @@ export default {
                 write: true,
             }
         }
-    }
+    },
 }
