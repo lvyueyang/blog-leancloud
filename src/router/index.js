@@ -77,21 +77,6 @@ export default new Router({
                 admin: () => import('../views/login-cb/index')
             }
         },
-        {
-            path: '/gitee-sign',
-            name: 'giteeSign',
-            components: {
-                admin: () => import('../views/login-cb/index')
-            }
-        },
-        {
-            path: '/test',
-            name: 'test',
-            components: {
-                admin: () => import('../views/test/index')
-            }
-        }
-
     ],
     scrollBehavior(to, from, savedPosition) {
         // 从第二页返回首页时savedPosition为undefined

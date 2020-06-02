@@ -48,11 +48,15 @@
         }
     }
 </script>
+<style>
+    body {
+        overflow: hidden;
+    }
+</style>
 <style lang="scss" scoped>
     .login-cb-wrapper {
         display: flex;
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
         align-items: center;
         justify-content: center;
 
@@ -61,6 +65,7 @@
             width: 100%;
             padding: 50px 15px;
             background-color: #fff;
+            margin-top: 20vh;
 
             .icon {
                 text-align: center;

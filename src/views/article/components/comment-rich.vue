@@ -7,12 +7,9 @@
         </div>
         <div class="operate">
             <div class="left">
-                <div class="icon" title="添加图片">
+                <div class="icon" title="添加图片" @click="handlerInsetImage">
                     <i class="iconfont icon-image-fill"></i>
                 </div>
-                <!--<div class="icon" @click="handlerAtUser">
-                    <i class="iconfont icon-at-line"></i>
-                </div>-->
                 <div class="icon" title="插入代码" @click="handlerInsetBlockCode">
                     <i class="iconfont icon-terminal-fill"></i>
                 </div>
@@ -83,7 +80,10 @@
             async handlerSubmit() {
                 await this.$emit('submit')
             },
-            handlerAtUser() {
+            handlerInsetImage() {
+                let text = '![]()'
+                let offset = 2
+                this.insetStr(text, offset, true)
             },
             handlerPreview() {
                 this.md.show = !this.md.show

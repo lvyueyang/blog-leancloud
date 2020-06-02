@@ -8,13 +8,13 @@
             </div>
             <div class="form-wrap">
                 <div class="form-item">
-                    <label for="">昵称：</label>
+                    <label>昵称：</label>
                     <div class="content-text">
                         <input type="text" v-model="userinfo.name">
                     </div>
                 </div>
                 <div class="form-item">
-                    <label for="">性别：</label>
+                    <label>性别：</label>
                     <div class="content-text">
                         <select v-model="userinfo.sex">
                             <option value="0">保密</option>
@@ -25,19 +25,19 @@
                     </div>
                 </div>
                 <div class="form-item">
-                    <label for="">邮箱：</label>
+                    <label>邮箱：</label>
                     <div class="content-text">
                         <input type="email" disabled v-model="userinfo.email">
                     </div>
                 </div>
                 <div class="form-item">
-                    <label for="">gitHub地址：</label>
+                    <label>gitHub地址：</label>
                     <div class="content-text">
                         <input type="email" v-model="userinfo.gitHub">
                     </div>
                 </div>
                 <div class="form-item">
-                    <label for="">签名：</label>
+                    <label>签名：</label>
                     <div class="content-text">
                         <textarea v-model="userinfo.ones" rows="4"></textarea>
                     </div>

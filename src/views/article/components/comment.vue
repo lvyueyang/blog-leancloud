@@ -2,7 +2,7 @@
     <div class="comment-wrap">
         <div class="title"><span>评 论</span></div>
         <comment-rich v-model="form.value"
-                      placeholder="填写你的评论内容 (支持Markdown语法，但是[表格、标题、图片]不会被转义)"
+                      placeholder="填写你的评论内容 (支持Markdown语法，但是[表格、标题]不会被转义)"
                       :loading="form.loading"
                       @submit="handlerSubmit"></comment-rich>
         <div class="list-none" v-if="list.length === 0">暂无评论</div>

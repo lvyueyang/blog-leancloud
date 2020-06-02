@@ -5,15 +5,20 @@
         </div>
         <div class="markdown-body" ref="MdBody" v-html="mdContent"></div>
 
-        <div class="drop-shade" :class="dropShadeLoading ? 'loading' : ''" v-show="dropShade"
-             @dragenter="dropShade = true" @drop.prevent="handlerDrop" @drag="dropShade = true"
-             @dragleave="dropShade = false">
+        <div class="drop-shade"
+             :class="dropShadeLoading ? 'loading' : ''"
+             v-show="dropShade"
+             @dragenter="dropShade = true"
+             @drag="dropShade = true"
+             @dragleave="dropShade = false"
+             @drop.prevent="handlerDrop">
             <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg">
         </div>
     </div>
 </template>
 
 <script>
+    import api from '@/api'
     import CodeMirror from 'codemirror'
     import 'codemirror/lib/codemirror.css'
     import 'codemirror/mode/markdown/markdown'
@@ -70,24 +75,18 @@
             },
             // 图片上传
             async handlerDrop(e) {
+                this.dropShadeLoading = true
                 const file = e.dataTransfer.files[0]
                 try {
-                    await this.uploadImg(file)
-                    this.dropShadeLoading = false
+                    let name = this.$utils.store.get('userInfo').objectId + '-' + Date.now()
+                    const {data} = await api.uploadFile(file, name)
+                    this.editor.replaceSelection(`![${file.name}](${data.url})\n`)
                 } catch (e) {
                     console.log(e)
                 }
+                this.dropShadeLoading = false
                 this.dropShade = false
-            },
-            async uploadImg(file = false) {
-                if (file) {
-                    this.dropShadeLoading = true
-                    let form = new FormData()
-                    form.append('file', file)
-                    // let {data} = await this.$api.article.create(form)
-                    // this.mdAddImgUrl(file.name, data.url)
-                }
-            },
+            }
         }
     }
 </script>
