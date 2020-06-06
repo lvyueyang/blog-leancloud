@@ -108,14 +108,14 @@
                     const {data} = res
                     this.$utils.store.set('editor', {title: '', content: ''})
                     this.$pop.alert(`文章${this.id ? '修改' : '发布'}成功，点击确定查看文章`, () => {
-                        this.$router.push('/article/' + data.objectId)
+                        this.$router.push('/article/' + data.result.id)
                     })
                 } catch (e) {
                     console.log(e)
-                    this.$pop.notice({
+                    /*this.$pop.notice({
                         title: '文章发布失败',
                         type: 'error'
-                    })
+                    })*/
                 }
             },
             // 获取文章信息，回显
@@ -204,17 +204,24 @@
                 if (!name) {
                     return
                 }
+                if (this.tag.list.some(item => item.name === name)) {
+                    this.$pop.notice({
+                        title: '标签不能重复',
+                        type: 'error'
+                    })
+                    return
+                }
                 try {
-                    const {data} = await this.$api.tag.create(name)
+                    await this.$api.tag.create(name)
                     this.tag.active.push(name)
                     this.getTagsList()
                     this.tag.value = ''
                 } catch (e) {
-                    this.$pop.notice({
+                    /*this.$pop.notice({
                         title: '添加标签失败',
                         text: '标签不能重复',
                         type: 'error'
-                    })
+                    })*/
                 }
             },
         }

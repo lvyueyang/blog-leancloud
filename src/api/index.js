@@ -21,12 +21,7 @@ export default {
             return axios.get(`/classes/${TAG}`, {params: {count: '1',}})
         },
         create(name) {
-            return axios.post(`/classes/${TAG}`, {
-                name,
-                auth: userId(),
-                articleCount: 0,
-                ACL: ACLWriteSetMe()
-            })
+            return axios.post(`/functions/tagCreate`, {name})
         },
     },
     user,

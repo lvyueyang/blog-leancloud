@@ -9,16 +9,10 @@
                     <i class="iconfont icon-time-line"></i>{{info.createdAt | formatDate}}
                 </div>
                 <div class="span">
-                    <i class="iconfont icon-heart-line"></i>{{info.counts.collection}}
+                    <i class="iconfont icon-eye-line"></i>{{info.counts.look}}
                 </div>
                 <div class="span">
                     <i class="iconfont icon-message--line1"></i>{{info.counts.comment}}
-                </div>
-                <!--<div class="span">
-                    <i class="iconfont icon-eye-line"></i>{{info.counts.look}}
-                </div>-->
-                <div class="span collection" @click="handlerCollection">
-                    {{isCollection ? '已收藏' : '收藏'}}
                 </div>
                 <router-link v-if="userId === info.auth.objectId"
                              class="span cur"
@@ -71,17 +65,8 @@
             this.articleError = false
             await this.getDetail()
             this.loading = false
-            this.judgeCollection()
         },
         methods: {
-            async judgeCollection() {
-                try {
-                    const d = await this.$api.article.userInCollectionArticle(this.articleId)
-                    this.isCollection = !!d
-                } catch (e) {
-                    this.isCollection = false
-                }
-            },
             // 获取文章详情
             async getDetail() {
                 const id = this.articleId
@@ -94,22 +79,7 @@
                     })
                     this.articleError = true
                 }
-            },
-            async handlerCollection() {
-                const id = this.articleId
-                try {
-                    await this.$api.article.collection(id)
-                    await this.getDetail()
-                    await this.judgeCollection()
-                } catch (e) {
-                    console.log(e)
-                    this.$pop.notice({
-                        title: '操作失败',
-                        type: 'error'
-                    })
-                }
-
-            },
+            }
         }
     }
 </script>

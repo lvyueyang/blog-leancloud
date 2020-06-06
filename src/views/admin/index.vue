@@ -11,14 +11,7 @@
         <div class="link-list">
             <router-link to="/editor" class="on" target="_blank"><span>发布文章</span></router-link>
             <router-link :to="`/user`"><span>我的资料</span></router-link>
-            <router-link to=""
-                         v-if="$route.query.id">
-                <span>私信他</span>
-            </router-link>
-            <router-link to=""
-                         v-if="!$route.query.id || $route.query.id === userinfo.objectId">
-                <span>私信</span>
-            </router-link>
+            <router-link to="/message"><span>我的消息</span></router-link>
             <router-link to="/"><span>返回首页</span></router-link>
         </div>
         <div class="message-list">
@@ -67,7 +60,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -3,6 +3,10 @@ import {ARTICLE, COMMENT, USER} from '../classMap'
 import {ACLWriteSetMe, listPage, updateDataCount, userId, sendMessage, createPointer} from '../api-util'
 import user from '@/api/modules/user'
 
+function updateArticleCount(id, increase) {
+    return axios.post(`/functions/articleCommentCount`, {id, increase})
+}
+
 export default {
     list({page = 1, articleId} = {}) {
         return axios.get(`/classes/${COMMENT}`, {
@@ -57,7 +61,7 @@ export default {
             ]
         })
         return axios.post(`/classes/${COMMENT}`, data).then(res => {
-            updateDataCount(ARTICLE, articleId, 'counts.comment')
+            updateArticleCount(articleId, 1)
             return res
         })
     },
@@ -65,7 +69,7 @@ export default {
         return axios.put(`/classes/${COMMENT}/${id}`, {
             state: '0'
         }).then(res => {
-            updateDataCount(ARTICLE, articleId, 'counts.comment', -1)
+            updateArticleCount(articleId, -1)
             return res
         })
     }

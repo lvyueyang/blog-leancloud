@@ -33,31 +33,42 @@ axios.interceptors.response.use(function (res) {
 }, function (error) {
     // 对响应错误做点什么
     const {response} = JSON.parse(JSON.stringify(error))
+    console.log(response)
     if (response && response.data) {
         const data = response.data
         const status = response.status
-        const {code, message} = data
+        const {code, message, error} = data
+        console.log(status)
+        console.log(data)
+        if (response.config.url.includes('/users/me')) {
+            return Promise.reject(data)
+        }
         if (status === 500) {
             pop.notice({
                 title: '系统错误',
                 type: 'error'
             })
+        } else if (status === 400) {
+            pop.notice({
+                title: error,
+                type: 'error'
+            })
         }
-        if (code === 401 || code === 403) {
-            if (!response.config.url.includes('v1/userinfo')) {
-                pop.notice({
-                    title: message,
-                    type: 'error'
-                })
-            }
-        }
-        if (code === 401) {
-            if (!response.config.url.includes('v1/userinfo')) {
-                pop.notice({
-                    title: '没有登陆',
-                    type: 'error'
-                })
-            }
+        if (code === 403) {
+            pop.notice({
+                title: message,
+                type: 'error'
+            })
+        } else if (code === 401) {
+            pop.notice({
+                title: '没有登陆',
+                type: 'error'
+            })
+        } else {
+            pop.notice({
+                title: '操作失败',
+                type: 'error'
+            })
         }
         return Promise.reject(data)
     } else {

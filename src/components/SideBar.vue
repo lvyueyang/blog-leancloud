@@ -7,6 +7,7 @@
                     <small v-if="$root.isLogin" @click="quitFn">退出</small>
                     <template v-else>
                         <small @click="githubLogin">GitHub登录</small>
+                        <small @click="accountLogin">账号登录</small>
                     </template>
                 </div>
             </div>
@@ -95,6 +96,11 @@
                 let url = `https://github.com/login/oauth/authorize?client_id=${client_id}&scope=user,public_repo&state=login`
                 window.open(url, 'githubsign', 'menubar=0,scrollbars=1, resizable=1,status=0,titlebar=0,toolbar=0,location=0,width=520,height=780')
             },
+            accountLogin() {
+                this.$api.user.login.login().then(res => {
+                    this.$utils.store.set('token', res.data.sessionToken)
+                })
+            }
         }
     }
 </script>

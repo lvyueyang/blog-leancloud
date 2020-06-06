@@ -18,8 +18,8 @@
                 </router-link>
                 <div class="operate-info">
                     <button>
-                        <i class="iconfont icon-heart-line"></i>
-                        <span> {{v.counts.collection}}</span>
+                        <i class="iconfont icon-eye-line"></i>
+                        <span> {{v.counts.look}}</span>
                     </button>
                     <button>
                         <i class="iconfont icon-message--line1"></i>

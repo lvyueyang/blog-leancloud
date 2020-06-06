@@ -64,6 +64,13 @@ export default new Router({
             }
         },
         {
+            path: '/message',
+            name: 'Message',
+            components: {
+                admin: () => import('../views/message/index')
+            }
+        },
+        {
             path: '/editor',
             name: 'Editor',
             components: {
@@ -75,6 +82,13 @@ export default new Router({
             name: 'githubSign',
             components: {
                 admin: () => import('../views/login-cb/index')
+            }
+        },
+        {
+            path: '/init',
+            name: 'init',
+            components: {
+                admin: () => import('../views/init/index')
             }
         },
     ],

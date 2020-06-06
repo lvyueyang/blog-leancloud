@@ -12,7 +12,7 @@
                 <i class="iconfont icon-bookmark--line"></i>{{v.tags[0]}}
               </span>
                 <span>
-                <i class="iconfont icon-heart-line"></i>{{v.counts.collection}}
+                <i class="iconfont icon-eye-line"></i>{{v.counts.look}}
               </span>
                 <span>
                 <i class="iconfont icon-message--line1"></i>{{v.counts.comment}}

@@ -6,7 +6,16 @@ export default {
     login: {
         gitHub(code) {
             return axios.post(`/functions/gitHubLogin`, {code}, {notToken: true})
+        },
+        login() {
+            return axios.post('/login', {
+                username: 'ajax',
+                password: '123456'
+            })
         }
+    },
+    initProject() {
+        return axios.post(`/functions/initProject`)
     },
     info() {
         return axios.get(`/users/me`)
