@@ -38,8 +38,6 @@ axios.interceptors.response.use(function (res) {
         const data = response.data
         const status = response.status
         const {code, message, error} = data
-        console.log(status)
-        console.log(data)
         if (response.config.url.includes('/users/me')) {
             return Promise.reject(data)
         }

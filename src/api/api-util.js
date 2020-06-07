@@ -60,19 +60,6 @@ export function listPage(page) {
     }
 }
 
-
-/**
- * 数字增加/减少
- * @param {String} classes
- * @param {String}  id
- * @param {String} key
- * @param {Number} amount 1:增加  -1:减少
- * @return Object
- * */
-export async function updateDataCount(classes, id, key, amount = 1) {
-    return axios.put(`/classes/${classes}/${id}`, {[key]: {__op: 'Increment', amount}})
-}
-
 /**
  * 发送消息
  * @param {String} from 发送者

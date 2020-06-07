@@ -112,10 +112,6 @@
                     })
                 } catch (e) {
                     console.log(e)
-                    /*this.$pop.notice({
-                        title: '文章发布失败',
-                        type: 'error'
-                    })*/
                 }
             },
             // 获取文章信息，回显
@@ -217,11 +213,7 @@
                     this.getTagsList()
                     this.tag.value = ''
                 } catch (e) {
-                    /*this.$pop.notice({
-                        title: '添加标签失败',
-                        text: '标签不能重复',
-                        type: 'error'
-                    })*/
+                    console.error(e)
                 }
             },
         }

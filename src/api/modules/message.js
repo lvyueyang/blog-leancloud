@@ -15,7 +15,7 @@ export default {
         })
     },
 
-    remove(id, articleId) {
+    remove(id) {
         return axios.put(`/classes/${MESSAGE}/${id}`, {
             state: '0'
         }).then(res => {

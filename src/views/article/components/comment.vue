@@ -261,6 +261,7 @@
                 border-radius: 2px;
                 overflow: hidden;
                 margin-right: 10px;
+                border: 1px solid #ddd;
             }
 
             .item-wrap-content {

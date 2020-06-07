@@ -1,7 +1,6 @@
 import axios from '../axios'
 import {ARTICLE, COMMENT, USER} from '../classMap'
-import {ACLWriteSetMe, listPage, updateDataCount, userId, sendMessage, createPointer} from '../api-util'
-import user from '@/api/modules/user'
+import {ACLWriteSetMe, listPage, userId, sendMessage, createPointer} from '../api-util'
 
 function updateArticleCount(id, increase) {
     return axios.post(`/functions/articleCommentCount`, {id, increase})

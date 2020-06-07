@@ -1,6 +1,10 @@
 import axios from '../axios'
-import {ARTICLE, COMMENT, COMMENT_CHILDREN, USER} from '../classMap'
-import {ACLWriteSetMe, createPointer, listPage, updateDataCount, userId} from '../api-util'
+import {COMMENT_CHILDREN, USER} from '../classMap'
+import {ACLWriteSetMe, createPointer, listPage, userId} from '../api-util'
+
+function updateCommentCount(id, increase) {
+    return axios.post(`/functions/commentCount `, {id, increase})
+}
 
 export default {
     list({page = 1, commentId} = {}) {
@@ -38,7 +42,7 @@ export default {
             ACL: ACLWriteSetMe()
         }
         return axios.post(`/classes/${COMMENT_CHILDREN}`, data).then(res => {
-            updateDataCount(COMMENT, commentId, 'counts.comment')
+            updateCommentCount(commentId, 1)
             return res
         })
     },
@@ -46,7 +50,7 @@ export default {
         return axios.put(`/classes/${COMMENT_CHILDREN}/${id}`, {
             state: '0'
         }).then(res => {
-            updateDataCount(COMMENT, commentId, 'counts.comment', -1)
+            updateCommentCount(commentId, -1)
             return res
         })
     }
