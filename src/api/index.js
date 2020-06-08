@@ -44,6 +44,7 @@ export default {
         })
     },
     uploadFile(file, name) {
+        console.log(name)
         const formData = new FormData()
         formData.append('file', file)
         return axios.post(`/files/${name}`, formData, {
@@ -61,7 +62,7 @@ export default {
                     }
                 }
             })
-            const id = data.results[0]
+            const id = data.results[0].objectId
             if (id) {
                 await axios.delete(`/files/${id}`)
                 return Promise.resolve()

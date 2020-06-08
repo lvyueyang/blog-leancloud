@@ -16,7 +16,12 @@
         },
         methods: {
             async init() {
-                this.$api.user.initProject()
+                try {
+                    await this.$api.user.initProject()
+                    this.$pop.alert('初始化成功')
+                } catch (e) {
+                    console.error(e)
+                }
             }
         }
     }

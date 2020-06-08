@@ -12,7 +12,13 @@ export default {
                 username: 'ajax',
                 password: '123456'
             })
-        }
+        },
+        register() {
+            return axios.post('/users', {
+                username: 'ajax',
+                password: '123456'
+            })
+        },
     },
     initProject() {
         return axios.post(`/functions/initProject`)

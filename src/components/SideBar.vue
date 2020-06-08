@@ -97,7 +97,7 @@
                 window.open(url, 'githubsign', 'menubar=0,scrollbars=1, resizable=1,status=0,titlebar=0,toolbar=0,location=0,width=520,height=780')
             },
             accountLogin() {
-                this.$api.user.login.login().then(res => {
+                this.$api.user.login.register().then(res => {
                     this.$utils.store.set('token', res.data.sessionToken)
                 })
             }

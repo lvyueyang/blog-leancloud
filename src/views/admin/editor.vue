@@ -19,7 +19,7 @@
                         </div>
                         <div class="text">
                             <input type="text" @keyup.enter="handlerAddTag" v-model="tag.value" placeholder="请输入标签名称">
-                            <div class="tishi">按下回车键，添加标签</div>
+                            <div class="tip">按下回车键，添加标签</div>
                         </div>
                         <Button class="submit" @click="handlerSubmitArticle">确认并{{id ? '修改' : '发布'}}</Button>
                     </dd>
@@ -323,17 +323,18 @@
                         input {
                             border: none;
                             border-bottom: 1px solid #ccc;
+                            border-radius: 0;
 
                             &:focus {
                                 border-color: #000;
 
-                                & + .tishi {
+                                & + .tip {
                                     opacity: 1;
                                 }
                             }
                         }
 
-                        .tishi {
+                        .tip {
                             padding: 5px 0 0 5px;
                             opacity: 0;
                             color: #ccc;

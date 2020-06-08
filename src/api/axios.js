@@ -54,7 +54,7 @@ axios.interceptors.response.use(function (res) {
         }
         if (code === 403) {
             pop.notice({
-                title: message,
+                title: message || error,
                 type: 'error'
             })
         } else if (code === 401) {
