@@ -1,13 +1,12 @@
 <template>
     <div class="tag-wrapper">
-        <div class="title">目前共计{{$root.count.tag}}个标签</div>
+        <div class="title">目前共计{{list.length}}个标签</div>
         <div class="tag-list">
             <ul>
                 <router-link v-for="v in list"
                              :to="`/article?tag=${v.name}`"
                              :key="v.objectId"
-                             tag="li"
-                             :style="{'font-size': v.size + 'px'}">{{v.name}}
+                             tag="li">{{v.name}}
                 </router-link>
             </ul>
         </div>
@@ -21,21 +20,13 @@
                 list: []
             }
         },
-        created() {
-            this.getList()
-        },
         mounted() {
+            this.getList()
         },
         methods: {
             async getList() {
                 const {data} = await this.$api.tag.list()
-                this.list = data.results.map(i => {
-                    i.size = i.articleCount + 14
-                    if (i.size > 33) {
-                        i.size = 33
-                    }
-                    return i
-                })
+                this.list = data.results
             }
         }
     }

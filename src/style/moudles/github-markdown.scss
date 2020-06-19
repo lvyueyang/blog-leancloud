@@ -343,6 +343,7 @@
         .code {
             width: 100%;
             overflow-x: auto;
+            overflow-y: hidden;
             -webkit-overflow-scrolling: touch;
         }
 
@@ -659,16 +660,15 @@
 
         code {
             display: inline;
-            max-width: auto;
             padding: 0;
             margin: 0;
             overflow: visible;
-            line-height: inherit;
+            line-height: 1.7;
             word-wrap: normal;
             background-color: transparent;
             border: 0;
             font-size: 14px;
-            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
 
             &::after, &::before {
                 content: normal;

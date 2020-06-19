@@ -11,7 +11,6 @@
     "codemirror": "^5.54.0",
     "core-js": "^3.6.4",
     "dayjs": "^1.7.7",
-    "highlight.js": "^9.13.1",
     "markdown-it": "^11.0.0",
     "vue": "^2.5.17",
     "vue-popjs": "^1.0.2",

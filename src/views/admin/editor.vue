@@ -99,16 +99,18 @@
                 }
                 try {
                     let res
+                    let id
                     if (this.id) {
                         form.id = this.id
                         res = await this.$api.article.update(form)
+                        id = this.id
                     } else {
                         res = await this.$api.article.create(form)
+                        id = res.data.result.id
                     }
-                    const {data} = res
                     this.$utils.store.set('editor', {title: '', content: ''})
                     this.$pop.alert(`文章${this.id ? '修改' : '发布'}成功，点击确定查看文章`, () => {
-                        this.$router.push('/article/' + data.result.id)
+                        this.$router.push('/article/' + id)
                     })
                 } catch (e) {
                     console.log(e)
@@ -358,11 +360,5 @@
                 }
             }
         }
-
-        .editor-main {
-
-        }
     }
-
-
 </style>

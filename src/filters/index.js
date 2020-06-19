@@ -1,18 +1,13 @@
 import Vue from 'vue'
 import {formatDate, relativeTime} from '@/util/formatDate'
-import userFormat from '@/util/userFormat'
 
 Vue.filter('formatDate', formatDate)
 Vue.filter('relativeTime', relativeTime)
-Vue.filter('userFormat', userFormat)
 
 // 将html转换为text
 Vue.filter('contentFilter', html => {
     let dom = document.createElement('div')
     dom.innerHTML = html
-    for (let i of dom.querySelectorAll('pre')) {
-        dom.removeChild(i)
-    }
     return dom.innerText
 })
 // 文字截取

@@ -7,7 +7,6 @@
                     <small v-if="$root.isLogin" @click="quitFn">退出</small>
                     <template v-else>
                         <small @click="githubLogin">GitHub登录</small>
-                        <small @click="accountLogin">账号登录</small>
                     </template>
                 </div>
             </div>
@@ -58,18 +57,20 @@
         data() {
             return {
                 left: 0,
-                mobileShow: false
+                mobileShow: false,
+                count: {
+                    article: 0,
+                    tag: 0,
+                }
             }
         },
         computed: {
             userinfo() {
                 return this.$root.userinfo
             },
-            count() {
-                return this.$root.count
-            }
         },
         async mounted() {
+            this.getCounts()
         },
         methods: {
             quitFn() {
@@ -91,16 +92,19 @@
             mobileHide() {
                 this.$emit('linkClick')
             },
+            async getCounts() {
+                try {
+                    const res = await this.$api.counts()
+                    this.count.article = res[0]
+                    this.count.tag = res[1]
+                } catch (e) {
+                }
+            },
             githubLogin() {
                 let client_id = process.env.VUE_APP_CLIENT_ID
                 let url = `https://github.com/login/oauth/authorize?client_id=${client_id}&scope=user,public_repo&state=login`
                 window.open(url, 'githubsign', 'menubar=0,scrollbars=1, resizable=1,status=0,titlebar=0,toolbar=0,location=0,width=520,height=780')
             },
-            accountLogin() {
-                this.$api.user.login.register().then(res => {
-                    this.$utils.store.set('token', res.data.sessionToken)
-                })
-            }
         }
     }
 </script>

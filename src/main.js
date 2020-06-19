@@ -19,14 +19,9 @@ new Vue({
     data: {
         isLogin: true,
         userinfo: null,
-        count: {
-            article: 0,
-            tag: 0,
-        }
     },
     created() {
         this.getUserInfo()
-        this.getCounts()
     },
     methods: {
         async getUserInfo() {
@@ -39,15 +34,7 @@ new Vue({
                 utils.store.set('userInfo', '')
                 this.isLogin = false
             }
-        },
-        async getCounts() {
-            try {
-                const res = await this.$api.counts()
-                this.count.article = res[0]
-                this.count.tag = res[1]
-            } catch (e) {
-            }
-        },
+        }
     },
     render: h => h(App)
 }).$mount('#app')

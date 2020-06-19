@@ -42,10 +42,11 @@ export default {
         }
         return axios.post(`/functions/articleCreate`, data)
     },
-    update({title, content, tags = [], id, contentType, top} = {}) {
+    update({title, content, markdown, tags = [], id, contentType = 'markdown', top} = {}) {
         return axios.put(`/classes/${ARTICLE}/${id}`, {
             title,
             content,
+            markdown,
             contentType,
             tags,
         })

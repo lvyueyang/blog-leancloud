@@ -1,9 +1,5 @@
 import axios from './axios'
 import {ARTICLE, TAG, FILE} from './classMap'
-import {
-    userId,
-    ACLWriteSetMe,
-} from './api-util'
 
 import article from './modules/article'
 import comment from './modules/comment'

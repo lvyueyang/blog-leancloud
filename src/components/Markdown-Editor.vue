@@ -54,8 +54,9 @@
             init() {
                 const editor = CodeMirror.fromTextArea(this.$refs['Textarea'], {
                     mode: 'markdown',
-                    lineNumbers: false,
+                    // lineNumbers: false,
                     lineWrapping: true,
+                    inputStyle: 'contenteditable'
                 })
                 this.editor = editor
                 const mdView = this.$refs['MdBody']
@@ -101,6 +102,7 @@
 
         .editor {
             flex: 0 0 50%;
+            width: 50%;
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -119,6 +121,10 @@
             .CodeMirror-vscrollbar {
                 outline: none;
             }
+
+            .CodeMirror-code {
+                margin-bottom: 50vh;
+            }
         }
 
         .cm-s-default .cm-header {
@@ -132,7 +138,7 @@
         .markdown-body {
             height: 100%;
             overflow-y: auto;
-            padding: 15px;
+            padding: 15px 15px 50vh;
         }
 
         .drop-shade {

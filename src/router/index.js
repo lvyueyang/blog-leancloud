@@ -6,7 +6,6 @@ const Main = () => import('../views/main')
 
 Vue.use(Router)
 export default new Router({
-    // mode: 'history',
     routes: [
         {
             path: '/',
@@ -30,21 +29,21 @@ export default new Router({
                     path: '/article',
                     name: 'ArticleList',
                     components: {
-                        default: () => import('../views/article/list')
+                        default: () => import('../views/article/list.vue')
                     }
                 },
                 {
                     path: '/article/:id',
                     name: 'ArticleDetail',
                     components: {
-                        default: () => import('../views/article/detail')
+                        default: () => import('../views/article/detail.vue')
                     }
                 },
                 {
                     path: '/tag',
                     name: 'Tag',
                     components: {
-                        default: () => import('../views/tag/index')
+                        default: () => import('../views/tag/index.vue')
                     }
                 }
             ]
@@ -53,42 +52,42 @@ export default new Router({
             path: '/admin',
             name: 'Admin',
             components: {
-                admin: () => import('../views/admin/index')
+                admin: () => import('../views/admin/index.vue')
             }
         },
         {
             path: '/user',
             name: 'UserInfo',
             components: {
-                admin: () => import('../views/admin/user-info')
+                admin: () => import('../views/admin/user-info.vue')
             }
         },
         {
             path: '/message',
             name: 'Message',
             components: {
-                admin: () => import('../views/message/index')
+                admin: () => import('../views/message/index.vue')
             }
         },
         {
             path: '/editor',
             name: 'Editor',
             components: {
-                admin: () => import('../views/admin/editor')
+                admin: () => import('../views/admin/editor.vue')
             }
         },
         {
             path: '/github-sign',
             name: 'githubSign',
             components: {
-                admin: () => import('../views/login-cb/index')
+                admin: () => import('../views/login-cb/index.vue')
             }
         },
         {
             path: '/init',
             name: 'init',
             components: {
-                admin: () => import('../views/init/index')
+                admin: () => import('../views/init/index.vue')
             }
         },
     ],

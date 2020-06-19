@@ -1,18 +1,17 @@
 import Vue from 'vue'
 import axios from 'axios'
 import utils from '../util/index'
-import CONFIG from '../config'
 import vPop from 'vue-popjs'
 
 Vue.use(vPop)
 const pop = Vue.prototype.$pop
 
-axios.defaults.baseURL = CONFIG.leancloud.apiUrl + '/1.1'
+axios.defaults.baseURL = process.env.VUE_APP_SERVE + '/1.1'
 // 请求拦截器
 axios.interceptors.request.use(function (config) {
     const token = utils.store.get('token')
-    config.headers['X-LC-Id'] = CONFIG.leancloud.AppID
-    config.headers['X-LC-Key'] = CONFIG.leancloud.AppKey
+    config.headers['X-LC-Id'] = process.env['VUE_APP_LEANCLOUD_APPID']
+    config.headers['X-LC-Key'] = process.env['VUE_APP_LEANCLOUD_APPKEY']
     config.headers['Content-Type'] = 'application/json'
     if (token && !config.notToken) {
         // 写入token
