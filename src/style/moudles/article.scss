@@ -13,6 +13,7 @@
 
     span {
         position: relative;
+        display: inline-block;
 
         &:after {
             content: "";
