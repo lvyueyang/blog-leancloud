@@ -2,7 +2,7 @@
     <div>
         <div class="side-bar" :class="mobileShow ? 'mobile' : ''">
             <div class="blog-name text-center">
-                <div>LC_BLOG</div>
+                <div>阿炸克斯</div>
                 <div>
                     <small v-if="$root.isLogin" @click="quitFn">退出</small>
                     <template v-else>

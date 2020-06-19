@@ -1,0 +1,101 @@
+{
+  "schema": {
+    "salt": {
+      "type": "String"
+    },
+    "gitHub": {
+      "type": "String"
+    },
+    "email": {
+      "type": "String"
+    },
+    "sessionToken": {
+      "type": "String"
+    },
+    "updatedAt": {
+      "type": "Date"
+    },
+    "sex": {
+      "type": "String"
+    },
+    "ACL": {
+      "type": "ACL",
+      "required": false,
+      "default": {
+        "_owner": {
+          "write": true
+        },
+        "*": {
+          "read": true
+        }
+      },
+      "hidden": true,
+      "read_only": false
+    },
+    "password": {
+      "type": "String"
+    },
+    "ones": {
+      "type": "String"
+    },
+    "name": {
+      "type": "String"
+    },
+    "objectId": {
+      "type": "String"
+    },
+    "username": {
+      "type": "String"
+    },
+    "createdAt": {
+      "type": "Date"
+    },
+    "emailVerified": {
+      "type": "Boolean",
+      "required": false,
+      "hidden": true,
+      "read_only": false
+    },
+    "mobilePhoneNumber": {
+      "type": "String"
+    },
+    "avatar": {
+      "type": "String"
+    },
+    "authData": {
+      "type": "Object",
+      "user_private": true,
+      "required": false,
+      "hidden": true,
+      "read_only": false
+    },
+    "mobilePhoneVerified": {
+      "type": "Boolean",
+      "required": false,
+      "hidden": true,
+      "read_only": false
+    }
+  },
+  "permissions": {
+    "create": {
+      "roles": [],
+      "users": []
+    },
+    "find": {},
+    "get": {
+      "*": true
+    },
+    "update": {
+      "roles": [],
+      "users": []
+    },
+    "delete": {
+      "roles": [],
+      "users": []
+    },
+    "add_fields": {
+      "roles": [],
+      "users": []
+    }
+  }
+}
