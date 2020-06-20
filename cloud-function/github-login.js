@@ -38,13 +38,29 @@ AV.Cloud.define('gitHubLogin', async function (request) {
         return rp(userOption)
     }
 
+    async function updateUserInfo(avUser, userInfo) {
+        const queryUser = new AV.Query('_User')
+        queryUser.equalTo('authData.github.openid', userInfo.node_id)
+        let u = await queryUser.find()
+        if (u.length === 0) {
+            let user = AV.Object.createWithoutData('_User', avUser.id)
+            user.set('email', userInfo.email)
+            user.set('name', userInfo.name)
+            user.set('avatar', userInfo.avatar_url)
+            user.set('gitHub', userInfo.html_url)
+            user.set('sex', '9')
+            user.set('ones', '')
+            let acl = new AV.ACL()
+            acl.setPublicReadAccess(true)
+            acl.setWriteAccess(avUser, true)
+            user.setACL(acl)
+            await user.save()
+        }
+    }
+
     try {
-        console.log('code2AccessToken', `code=${code}`)
         const {access_token} = await code2AccessToken()
-        console.log(access_token)
-        console.log('accessToken2Userinfo')
         const userInfo = await accessToken2Userinfo(access_token)
-        console.log(userInfo)
         // 使用用户信息进行第三方登陆
         const authData = {
             openid: userInfo.node_id,
@@ -52,20 +68,7 @@ AV.Cloud.define('gitHubLogin', async function (request) {
             expires_in: 7200,
         }
         const avUser = await AV.User.loginWithAuthData(authData, 'github')
-        console.log('avUser\n', avUser)
-        console.log(avUser._sessionToken)
-        let user = AV.Object.createWithoutData('_User', avUser.id)
-        user.set('email', userInfo.email)
-        user.set('name', userInfo.name)
-        user.set('avatar', userInfo.avatar_url)
-        user.set('gitHub', userInfo.html_url)
-        user.set('sex', '9')
-        user.set('ones', '')
-        let acl = new AV.ACL()
-        acl.setPublicReadAccess(true)
-        acl.setWriteAccess(avUser, true)
-        user.setACL(acl)
-        await user.save()
+        await updateUserInfo(avUser, userInfo)
         return {
             token: avUser._sessionToken,
             // userInfo
